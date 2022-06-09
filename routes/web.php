@@ -18,3 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/todoes/list',function (){
+    return view('todo.list');
+});

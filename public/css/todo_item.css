@@ -1,0 +1,73 @@
+body{
+    background-color:blue;
+}
+*{
+    font-family:"Varela Round", cursive;
+}
+.todo-item {
+    --focus-color:0, 255, 255;
+    --unfocus-color:0, 0, 139;
+    padding:10px;
+}
+
+.todo-item .container{
+    background-color:rgba(var(--focus-color),.5);
+    border-radius:40px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:40px;
+    gap:10px;
+    box-shadow:0 0 70px -20px #000;
+    color:rgb(var(--focus-color));
+}
+
+
+
+.todo-item .container *{
+    margin:0;
+    padding:10px;
+}
+.todo-item .container *::selection{
+    background-color:rgb(var(--focus-color));
+    color:rgb(var(--unfocus-color));
+}
+.todo-item .container > *{
+    flex-grow:1;
+    background-color:rgba(var(--focus-color),.7);
+    color:rgb(var(--unfocus-color));
+    border-radius:20px;
+}
+
+.todo-item .container .title {
+    flex-grow:1;
+    background:none;
+    color:rgb(var(--focus-color));
+}
+
+.todo-item .container .status {
+    text-align:center;
+    flex-grow:0;
+}
+
+.todo-item .container .description {
+    width:100%;
+    min-height:100px;
+    height:auto;
+    max-height:300px;
+
+    transition:all 1s linear;
+    white-space:pre-line;
+    overflow:auto;
+}
+
+.todo-item .container .description::-webkit-scrollbar{
+    width:40px;
+}
+.todo-item .container .description::-webkit-scrollbar-thumb{
+    background-color:rgba(var(--unfocus-color),.3);
+    border-radius:20px;
+}
+.todo-item .container .description::-webkit-scrollbar-thumb:active{
+    background-color:rgb(var(--unfocus-color));
+}
