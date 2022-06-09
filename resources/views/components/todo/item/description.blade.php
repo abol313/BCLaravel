@@ -1,3 +1,3 @@
 <div class="description">
-    <h3>{{$value}}</h3>
+    <h2>{{$value}}</h2>
 </div>

@@ -10,6 +10,8 @@
         <x-todo.item.title value="{{ $title }}" />
         <x-todo.item.status value="{{ $status }}" />
         <x-todo.item.description value="{{ $description }}" />
-        <x-todo.item.due value="{{ $due }}" />
+        @unless(empty($due))
+            <x-todo.item.due value="{{ $due }}" />
+        @endunless
     </x-todo.item.container>
 </div>
