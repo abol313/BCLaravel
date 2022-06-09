@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@pushOnce('styles')
+@pushonce('styles')
     <link rel="stylesheet" href="{{asset('css/todo_item.css')}}"/>
-@endPushOnce
+@endPushonce
 
 @section('body')
     <x-todo.item title="Hello !!!">
