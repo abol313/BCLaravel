@@ -18,9 +18,22 @@
 
 </head>
 <body>
+    <header>
+        <h1>Welcome to Todo-Collection</h1>
+        <nav>
+            <ul class="hypers">
+                <a href="{{asset('/todoes/list')}}"><li><h2>List</h2></li></a>
+                <a href="{{asset('/todoes/make')}}"><li><h2>Make</h2></li></a>
+            </ul>
+        </nav>
+    </header>
     @section('body')
         <h1>Welcome to the Laravel</h1>
     @show
+    <footer>
+        <hr/>
+        <h1>Made with interseting ;)</h1>
+    </footer>
 </body>
 </html>
 
