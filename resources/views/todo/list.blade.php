@@ -1,13 +1,22 @@
 @extends('layouts.app')
+
 @php
     use App\Models\Todo;
 @endphp
-@pushonce('styles')
+
+@push('styles')
     <link rel="stylesheet" href="{{asset('css/todo_item.css')}}"/>
-@endPushonce
+@endPush
 
 @section('body')
-    @foreach(Todo::all() as $todoRow)
-        <x-todo.item title="{{$todoRow->title}}" status="{{$todoRow->status}}" description="{{$todoRow->description}}" due="{{$todoRow->due}}"/>
-    @endforeach
+    @forelse(Todo::all() as $todoRecord)
+        @php
+            $todo = $todoRecord->id;
+            $redirect = asset('todoes/list');
+            $deletePath = asset("todoes/delete/$todo"."?redirect=$redirect");
+        @endphp
+        <x-todo.item title="{{$todoRecord->title}}" status="{{$todoRecord->status}}" description="{{$todoRecord->description}}" due="{{$todoRecord->due}}" :delete-path="$deletePath"/>
+    @empty
+        <h1 class="no-todo-item">No todo !</h1>
+    @endforelse
 @endsection

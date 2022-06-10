@@ -1,12 +1,7 @@
-body{
-    background-color:blue;
-}
-*{
-    font-family:"Varela Round", cursive;
-}
+
 .todo-item {
-    --focus-color:0, 255, 255;
-    --unfocus-color:0, 0, 139;
+    /* --focus-color:0, 255, 255;
+    --unfocus-color:0, 0, 139; */
     padding:10px;
 }
 
@@ -70,4 +65,12 @@ body{
 }
 .todo-item .container .description::-webkit-scrollbar-thumb:active{
     background-color:rgb(var(--unfocus-color));
+}
+
+.todo-item .container .delete{
+    width:100%;
+    background-color:rgb(var(--danger-color));
+}
+.no-todo-item {
+    align-self:center;
 }

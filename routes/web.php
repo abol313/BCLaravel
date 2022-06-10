@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/todoes/list',function (){
-    return view('todo.list');
+Route::group(['prefix'=>'/todoes','namespace'=>'\App\Http\Controllers'],function(){
+    Route::get('/list','Todo@listAll');
+    Route::get('/make','Todo@make');
+    Route::get('/delete/{id}','Todo@delete');
 });

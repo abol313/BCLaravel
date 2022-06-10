@@ -3,6 +3,7 @@
     'status' => 'Status',
     'description' => 'Description',
     'due' => '2022-12-20 00:00:00',
+    'deletePath' => '#'
 ])
 
 <div  {{ $attributes->class(['todo-item']) }}>
@@ -13,5 +14,6 @@
         @unless(empty($due))
             <x-todo.item.due value="{{ $due }}" />
         @endunless
+        <x-todo.item.delete :delete-path="$deletePath"/>
     </x-todo.item.container>
 </div>

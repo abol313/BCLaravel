@@ -1,0 +1,86 @@
+body{
+    justify-content:center;
+    align-items:center;
+    color:rgb(var(--focus-color));
+    --invalid-input-color:255, 94, 108;
+    --todo-message-succeed-focus-color:var(--unfocus-color);
+    --todo-message-succeed-unfocus-color:0, 255, 50;
+    --todo-message-unsucceed-focus-color:var(--unfocus-color);
+    --todo-message-unsucceed-unfocus-color:255, 94, 108;
+    --warning-color:255,255,0;
+}
+
+.form-todo-make-title{
+    z-index:2;
+}
+
+.todo-message{
+    width:400px;
+    max-width:90%;
+    padding:20px;
+    border-radius:20px;
+    /* background-color:rgba(var(--focus-color),.5); */
+    box-shadow:0 0 100px rgb(var(--unfocus-color));
+    display:flex;
+    flex-direction:column;
+    z-index:2;
+}
+.todo-message-succeed{
+    background-color:rgba(var(--todo-message-succeed-unfocus-color),.9);
+    color:rgb(var(--todo-message-succeed-focus-color));
+}
+.todo-message-unsucceed{
+    background-color:rgba(var(--todo-message-unsucceed-unfocus-color),.9);
+    color:rgb(var(--todo-message-unsucceed-focus-color));
+}
+
+
+.form-todo-make{
+    width:400px;
+    max-width:90%;
+    padding:20px;
+    border-radius:20px;
+    background-color:rgba(var(--focus-color),.5);
+    box-shadow:0 0 100px rgb(var(--unfocus-color));
+    display:flex;
+    flex-direction:column;
+}
+
+.form-todo-make :is(input,textarea){
+    font-size:1.5em;
+    margin-bottom:10px;
+    color:inherit;
+    background-color:transparent;
+    border:none;
+    padding:5px 0px;
+    caret-color:rgb(var(--focus-color));
+    border-bottom:1px solid rgba(var(--focus-color),.5);
+}
+.form-todo-make :is(input,textarea):invalid{
+    border-bottom-color:rgb(var(--invalid-input-color));
+}
+
+.form-todo-make :is(input,textarea)::placeholder{
+    color:rgba(var(--focus-color),.5);
+}
+.form-todo-make :is(input,textarea):focus{
+    outline:none;
+    border-bottom-color:rgb(var(--focus-color));
+}
+.form-todo-make .textarea-description{
+    font-size:1.3em;
+    resize:none;
+}
+
+.form-todo-make :is(.submit,.reset){
+    border:none;
+    margin:0;
+    background-color:rgb(var(--focus-color));
+    color:rgb(var(--unfocus-color));
+    border-radius:10px;
+}
+.form-todo-make .reset{
+    margin-bottom:10px;
+    background-color:rgb(var(--warning-color));
+}
+
