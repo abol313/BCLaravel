@@ -39,7 +39,7 @@ create table todoes (
 	title varchar(100) not null,
 	description text,
 	due datetime,
-	status enum('waiting','accepted','declined','done'),
+	status enum('waiting','accepted','declined','done') default 'waiting',
 	created_at datetime,
 	updated_at datetime,
 	deleted_at datetime
