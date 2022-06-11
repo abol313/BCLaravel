@@ -33,7 +33,7 @@ header{
 nav .hypers{
     display:flex;
     flex-wrap:wrap;
-    gap:10px;
+    gap:20px;
     list-style: none;
     padding:0px;
 }
@@ -44,7 +44,7 @@ nav .hypers > *{
     border-radius:10px;
     background-color:blue;
     color:rgba(var(--focus-color),.9);
-
+    width:100px;
 }
 
 footer{
