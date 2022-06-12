@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use App\Models as Models;
 use Illuminate\Database\Eloquent\Model;
 
-class Todo extends Controller{
+class TodoController extends Controller{
 
     private $validInputs = [
         'title'=>'required',

@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'/todoes','namespace'=>'\App\Http\Controllers'],function(){
-    Route::get('/list','Todo@listAll');
-    Route::get('/make','Todo@make');
-    Route::get('/delete/{id}','Todo@delete');
+    Route::get('/list','TodoController@listAll');
+    Route::get('/make','TodoController@make');
+    Route::get('/delete/{id}','TodoController@delete');
 });
