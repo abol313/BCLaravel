@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title','Laravel-Project')</title>
+    <title>@yield('title','Todo Collection')</title>
 
     <!--fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -13,7 +13,7 @@
     @stack('fonts')
 
     <!--styles-->
-    <link rel="stylesheet" href="{{asset('css/main.css')}}"/>
+    <link rel="stylesheet" href="{{mix('css/app.css')}}"/>
     @stack('styles')
 
 </head>
