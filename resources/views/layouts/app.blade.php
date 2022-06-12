@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title','Todo Collection')</title>
 
+    <!--site-icon-->
+    <link rel="shortcut icon" href="{{mix('images/todo_icon.png')}}"/>
+
     <!--fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>

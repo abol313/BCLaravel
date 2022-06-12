@@ -13,5 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .styles('resources/css/*','public/css/app.css')
-
+    .copy('resources/images/*','public/images')
 mix.version()
+
