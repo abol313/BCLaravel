@@ -49,10 +49,13 @@ class TodoController extends Controller{
         $userTodo = new Models\UserTodo;
         $userTodo->todo = $todo->id;
 
-        $commander = Models\User::where('unique_name',str_replace('@','',$request->input('commander')))->first();
+        // with unique_name maybe added in future....
+        // $commander = Models\User::where('unique_name',str_replace('@','',$request->input('commander')))->first();
+        
+        $commander = Models\User::where('email',$request->input('commander'))->first();
         if(!$commander)return response()->json(['success'=>false,'message'=>"The commander not found :/",'attributes'=>$attributes],500);
 
-        $soldier = Models\User::where('unique_name',str_replace('@','',$request->input('soldier')))->first();
+        $soldier = Models\User::where('email',$request->input('soldier'))->first();
         if(!$soldier)return response()->json(['success'=>false,'message'=>"The soldier not found :/",'attributes'=>$attributes],500);
 
         $userTodo->commander = $commander->id;

@@ -1,12 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.app-todo')
 
 @php
-    use App\Models\Todo;
-    
+    use App\Models\Todo; 
 @endphp
-@push('styles')
+{{-- @push('styles')
     <link rel="stylesheet" href="{{mix('css/main.css')}}"/>
-@endPush
+@endPush --}}
 
 @section('body')
     @forelse(Todo::all() as $todoRecord)

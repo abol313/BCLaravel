@@ -20,5 +20,9 @@ Route::get('/', function () {
 Route::group(['prefix'=>'/todoes','namespace'=>'\App\Http\Controllers'],function(){
     Route::get('/list','TodoController@listAll');
     Route::get('/make','TodoController@make');
-    Route::get('/delete/{id}','TodoController@delete');
+    Route::get('/delete/{id}','TodoController@delete')->middleware(['test']);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

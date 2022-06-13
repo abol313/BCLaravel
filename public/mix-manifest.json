@@ -1,6 +1,6 @@
 {
-    "/js/app.js": "/js/app.js?id=665841de0c12270cc31aa2fdbf6083b3",
-    "/css/main.css": "/css/main.css?id=dd9509f6e995d18e661014d6a7156b90",
-    "/css/app.css": "/css/app.css?id=86b6077fbaab632621e818c61a3b04eb",
-    "/images/todo_icon.png": "/images/todo_icon.png?id=59f4fc7dbf419d749dc8c745a59295f4"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/css/todo_app.css": "/css/todo_app.css",
+    "/images/todo_icon.png": "/images/todo_icon.png"
 }

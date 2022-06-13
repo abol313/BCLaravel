@@ -35,7 +35,7 @@ insert into users (`id`,`unique_name`,`first_name`,`last_name`,`phone`,`birth_da
 	(20,'sajjad2','Sajjad','Sooghi','+989362346021','2004-10-6','offline');
 
 create table todoes (
-	id int primary key auto_increment,
+	id bigint unsigned primary key auto_increment,
 	title varchar(100) not null,
 	description text,
 	due datetime,
@@ -59,10 +59,10 @@ insert into todoes (`id`,`title`,`description`,`due`,`status`) values
 	(10,'language','learn more abour languages','2022-12-10 15:10:25','waiting');
 
 create table users_todoes (
-	id int primary key auto_increment,
-	todo int not null,
-	commander int not null,
-	soldier int not null,
+	id bigint unsigned primary key auto_increment,
+	todo bigint unsigned not null,
+	commander bigint unsigned not null,
+	soldier bigint unsigned not null,
 	created_at datetime,
 	updated_at datetime,
 	deleted_at datetime
