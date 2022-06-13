@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'mix_url'=> env('MIX_ASSET_URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

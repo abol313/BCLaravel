@@ -11,8 +11,21 @@ const mix = require('laravel-mix');
  |
  */
 
+// mix.options(
+//     {
+//         autoprefixer:false
+//     }
+// )
 mix.js('resources/js/app.js', 'public/js')
     .styles('resources/css/*','public/css/app.css')
+    .postCss('resources/css/main.css','public/css',[
+    //   require('autoprefixer'),
+    //   require('postcss-sorting'),
+    //   require('postcss-custom-properties')
+    ])
     .copy('resources/images/*','public/images')
+
 mix.version()
 
+
+mix.browserSync('localhost:8000');
