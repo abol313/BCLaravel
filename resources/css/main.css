@@ -11,12 +11,12 @@
 }
 
 /* Dark theme */
-/* :root{
+:root{
     --focus-color:21,21,21 ;
     --unfocus-color:0, 155, 155;
     --warning-color:35,35,0;
     --danger-color:185, 24, 108;
-} */
+}
 
 
 body{
