@@ -4,12 +4,12 @@
 }
 
 /* Light theme */
-/* :root{
+:root{
     --focus-color:0, 255, 255;
     --unfocus-color:0, 0, 139;
     --warning-color:255,255,0;
     --danger-color:255, 94, 108;
-} */
+}
 
 /* Dark theme */
 /* :root{
