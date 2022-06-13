@@ -2,10 +2,10 @@
 
 @php
     use App\Models\Todo;
+    
 @endphp
-
 @push('styles')
-    <link rel="stylesheet" href="{{asset('css/todo_item.css')}}"/>
+    <link rel="stylesheet" href="{{mix('css/main.css')}}"/>
 @endPush
 
 @section('body')

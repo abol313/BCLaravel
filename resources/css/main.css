@@ -1,16 +1,25 @@
-:root{
-    --focus-color:0, 255, 255;
-    --unfocus-color:0, 0, 139;
-    --warning-color:255,255,0;
-    --danger-color:255, 94, 108;
+@keyframes kf{
+
 }
 
-body{
+/* Light theme */
+/* :root{
     --focus-color:0, 255, 255;
     --unfocus-color:0, 0, 139;
     --warning-color:255,255,0;
     --danger-color:255, 94, 108;
-    
+} */
+
+/* Dark theme */
+/* :root{
+    --focus-color:21,21,21 ;
+    --unfocus-color:0, 155, 155;
+    --warning-color:35,35,0;
+    --danger-color:185, 24, 108;
+} */
+
+
+body{
     background-color:blue;
 
     display:flex;

@@ -7,7 +7,6 @@ body{
     --todo-message-succeed-unfocus-color:0, 255, 50;
     --todo-message-unsucceed-focus-color:var(--unfocus-color);
     --todo-message-unsucceed-unfocus-color:255, 94, 108;
-    --warning-color:255,255,0;
 }
 
 .form-todo-make-title{
