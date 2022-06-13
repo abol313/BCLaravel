@@ -1,0 +1,124 @@
+@-webkit-keyframes kf{
+
+}
+
+@keyframes kf{
+
+}
+
+/* Light theme */
+/* :root{
+    --focus-color:0, 255, 255;
+    --unfocus-color:0, 0, 139;
+    --warning-color:255,255,0;
+    --danger-color:255, 94, 108;
+} */
+
+/* Dark theme */
+/* :root{
+    --focus-color:21,21,21 ;
+    --unfocus-color:0, 155, 155;
+    --warning-color:35,35,0;
+    --danger-color:185, 24, 108;
+} */
+
+
+body{
+    background-color:blue;
+
+    display:flex;
+    flex-direction:column;
+    margin:8px;
+    min-height:calc(100vh - 16px);
+    gap:20px;
+}
+
+header{
+    align-self:stretch;
+    text-align:center;
+    padding:20px;
+    border-radius:20px;
+    background-color:rgba(var(--focus-color),.9);
+    color:rgba(var(--unfocus-color),.9);
+    
+}
+
+nav .hypers{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    list-style: none;
+    padding:0px;
+}
+
+nav .hypers > *{
+    flex-grow:1;
+    padding:20px;
+    border-radius:10px;
+    background-color:blue;
+    color:rgba(var(--focus-color),.9);
+    width:100px;
+}
+
+footer{
+    align-self:stretch;
+    text-align:center;
+    box-sizing:border-box;
+    background-color:transparent;
+    color:rgb(var(--focus-color));
+    margin:-8px;
+    transition:all 1s ease-in;
+    
+}
+footer hr{
+    text-align:center;
+    
+    margin:0;
+    margin-left:auto;
+    margin-right:auto;
+    border-color:rgb(var(--focus-color));
+    transition:all 1s ease-out;
+    width:calc(100% - 3px);
+}
+
+footer:hover{
+    background-color:rgb(var(--focus-color));
+    color:rgb(var(--unfocus-color));
+}
+footer:hover hr{
+    width:0px;
+}
+
+body::-webkit-scrollbar{
+    width:20px;
+}
+body::-webkit-scrollbar-thumb{
+    background-color:rgba(var(--unfocus-color),.5);
+    border-radius:20px;
+}
+body::-webkit-scrollbar-thumb:active{
+    background-color:rgb(var(--unfocus-color));
+}
+
+.custom-scroll::-webkit-scrollbar{
+    width:0px;
+}
+.custom-scroll::-webkit-scrollbar{
+    width:20px;
+}
+.custom-scroll::-webkit-scrollbar-thumb{
+    background-color:rgba(var(--unfocus-color),.5);
+    border-radius:20px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:active{
+    background-color:rgb(var(--unfocus-color));
+}
+
+a{
+    text-decoration:none;
+    line-height:0px;
+    color:inherit;
+}
+*{
+    font-family:"Varela Round", cursive;
+}
