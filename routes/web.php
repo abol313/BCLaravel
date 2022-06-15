@@ -28,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::controller(TodoController::class)->prefix('/todos')->group(function(){
-    Route::get('/{id}','listOne');
+    Route::get('/{todo}','listOne');
     Route::get('/','listAll');
     Route::get('/make','make');
     Route::get('/delete/{id}','delete');

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models as Models;
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class TodoController extends Controller{
@@ -21,6 +22,9 @@ class TodoController extends Controller{
         'soldier'
     ];
 
+    public function listOne(Todo $todo){
+        return view('todo.todo',['todo'=>$todo]);
+    }
 
     public function listAll(Request $request){
         $hostName = $request->getHttpHost();
