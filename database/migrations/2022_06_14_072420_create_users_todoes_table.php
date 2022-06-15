@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users_todoes', function (Blueprint $table) {
+        Schema::create('users_todos', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('todo')->unsigned();
-            $table->foreign('todo')->references('id')->on('todoes');
+            $table->foreign('todo')->references('id')->on('todos');
 
             $table->bigInteger('commander')->unsigned()->foreign_key_constraints;
             $table->foreign('commander')->references('id')->on('users');
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_todoes');
+        Schema::dropIfExists('users_todos');
     }
 };

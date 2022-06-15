@@ -25,8 +25,8 @@
         <h1>Welcome to Todo-Collection</h1>
         <nav>
             <ul class="hypers">
-                <a href="{{asset('/todoes/list')}}"><li><h2>List</h2></li></a>
-                <a href="{{asset('/todoes/make')}}"><li><h2>Make</h2></li></a>
+                <a href="{{asset('/todos/list')}}"><li><h2>List</h2></li></a>
+                <a href="{{asset('/todos/make')}}"><li><h2>Make</h2></li></a>
             </ul>
         </nav>
     </header>

@@ -17,3 +17,5 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.styles('resources/css/*','public/css/todo_app.css')
 mix.copy('resources/images/todo_icon.png','public/images')
+
+let func= ()=>{}

@@ -34,7 +34,7 @@ insert into users (`id`,`unique_name`,`first_name`,`last_name`,`phone`,`birth_da
 	(19,'sadra','Sadra','Solmaz','+989363716752','2004-7-25','offline'),
 	(20,'sajjad2','Sajjad','Sooghi','+989362346021','2004-10-6','offline');
 
-create table todoes (
+create table todos (
 	id bigint unsigned primary key auto_increment,
 	title varchar(100) not null,
 	description text,
@@ -46,7 +46,7 @@ create table todoes (
 
 );
 
-insert into todoes (`id`,`title`,`description`,`due`,`status`) values
+insert into todos (`id`,`title`,`description`,`due`,`status`) values
 	(1,'teeth','go to the dentist','2022-12-10 10:20:45','waiting'),
 	(2,'programming','code js for dialog box view','2022-12-10 11:30:25','waiting'),
 	(3,'learn','learn about laravel documents until...','2022-12-10 11:40:15','waiting'),
@@ -58,7 +58,7 @@ insert into todoes (`id`,`title`,`description`,`due`,`status`) values
 	(9,'seba','odijoidjdw;odd ;oijd qo id p od','2022-12-10 14:20:24','waiting'),
 	(10,'language','learn more abour languages','2022-12-10 15:10:25','waiting');
 
-create table users_todoes (
+create table users_todos (
 	id bigint unsigned primary key auto_increment,
 	todo bigint unsigned not null,
 	commander bigint unsigned not null,
@@ -68,11 +68,11 @@ create table users_todoes (
 	deleted_at datetime
 );
 
-alter table users_todoes add constraint fk_todo foreign key (todo) references todoes(id);
-alter table users_todoes add constraint fk_commander foreign key (commander) references users(id);
-alter table users_todoes add constraint fk_soldier foreign key (soldier) references users(id);
+alter table users_todos add constraint fk_todo foreign key (todo) references todos(id);
+alter table users_todos add constraint fk_commander foreign key (commander) references users(id);
+alter table users_todos add constraint fk_soldier foreign key (soldier) references users(id);
 
-insert into users_todoes (`id`,`todo`,`commander`,`soldier`) values
+insert into users_todos (`id`,`todo`,`commander`,`soldier`) values
 	(1,1,3,5), -- todo teeth 
 	(2,1,3,9),
 	(3,1,3,12),

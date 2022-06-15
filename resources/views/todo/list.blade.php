@@ -11,8 +11,8 @@
     @forelse(Todo::all() as $todoRecord)
         @php
             $todo = $todoRecord->id;
-            $redirect = asset('todoes/list');
-            $deletePath = asset("todoes/delete/$todo"."?redirect=$redirect");
+            $redirect = asset('todos/list');
+            $deletePath = asset("todos/delete/$todo"."?redirect=$redirect");
         @endphp
             <x-todo.item title="{{$todoRecord->title}}" status="{{$todoRecord->status}}" description="{{$todoRecord->description}}" due="{{$todoRecord->due}}" :delete-path="$deletePath"/>
         @empty

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models as Models;
+use App\Models\Todo;
 use Illuminate\Database\Eloquent\Model;
 
 class TodoController extends Controller{
@@ -19,6 +20,7 @@ class TodoController extends Controller{
         'commander',
         'soldier'
     ];
+
 
     public function listAll(Request $request){
         $hostName = $request->getHttpHost();
@@ -72,13 +74,13 @@ class TodoController extends Controller{
         if(!$todo)
             return response()->json(['success'=>false,'message'=>'Did not found the todo :/','attributes'=>['id'=>$id]],500);
 
-        $usersTodoes = Models\UserTodo::where('todo',$id)->get();
-        if(!$usersTodoes)
+        $usersTodos = Models\UserTodo::where('todo',$id)->get();
+        if(!$usersTodos)
             return response()->json(['success'=>false,'message'=>'Did not found the todo :/','attributes'=>['id'=>$id]],500);
         
         $commanders = [];
         $soldiers = [];
-        foreach($usersTodoes as $userTodo){
+        foreach($usersTodos as $userTodo){
             $userTodo->delete();
             $commander = Models\User::find($userTodo->commander);
             $soldier = Models\User::find($userTodo->soldier);
