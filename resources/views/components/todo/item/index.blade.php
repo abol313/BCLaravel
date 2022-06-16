@@ -14,7 +14,7 @@
         $due = $todo->due;
     }
 
-    $deletePath = $id? route("route.todo.delete",['id'=>$id]):"#";
+    $deletePath = $id? route("route.todo.delete",['id'=>$id]):null;
 @endphp
 <div  {{ $attributes->class(['todo-item']) }}>
     <x-todo.item.container>
@@ -24,6 +24,8 @@
         @unless(empty($due))
             <x-todo.item.due value="{{ $due }}" />
         @endunless
-        <x-todo.item.delete :delete-path="$deletePath"/>
+        @if($deletePath)
+            <x-todo.item.delete :delete-path="$deletePath"/>
+        @endif
     </x-todo.item.container>
 </div>
