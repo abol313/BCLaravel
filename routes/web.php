@@ -35,7 +35,6 @@ Route::controller(TodoController::class)
             Route::get('/{todo}','listOne')->name('listOne');
             Route::get('/','listAll')->name('listAll');
             Route::get('/delete/{id}','delete')->name('delete');
-            Route::get('/query','query');
         });
 
 Route::get('/test',function(Request $request){
