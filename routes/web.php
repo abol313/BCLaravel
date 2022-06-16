@@ -27,11 +27,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::controller(TodoController::class)->prefix('/todos')->group(function(){
+Route::controller(TodoController::class)
+    ->prefix('/todos')
+    ->name('todo.')
+    ->group(function(){
     Route::get('/{todo}','listOne');
     Route::get('/','listAll');
     Route::get('/make','make');
-    Route::get('/delete/{id}','delete');
+    Route::get('/delete/{id}','delete')->name('delete');
     Route::get('/query','query');
 });
 
