@@ -1,4 +1,5 @@
 @props([
+    'todo'=>null
     'id'=> null
     'title' => 'Title',
     'status' => 'Status',
@@ -6,7 +7,7 @@
     'due' => '2022-12-20 00:00:00',
 ])
 @php
-    if($todo ?? null){
+    if($todo){
         $id = $todo->id;
         $title = $todo->title;
         $status = $todo->status;
