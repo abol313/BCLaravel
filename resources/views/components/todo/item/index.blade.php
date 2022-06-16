@@ -1,6 +1,6 @@
 @props([
-    'todo'=>null
-    'id'=> null
+    'todo'=>null,
+    'id'=> null,
     'title' => 'Title',
     'status' => 'Status',
     'description' => 'Description',
