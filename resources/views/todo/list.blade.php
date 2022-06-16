@@ -16,6 +16,6 @@
         @endphp
             <x-todo.item title="{{$todoRecord->title}}" status="{{$todoRecord->status}}" description="{{$todoRecord->description}}" due="{{$todoRecord->due}}" :delete-path="$deletePath"/>
         @empty
-        <h1 class="no-todo-item">No todo !</h1>
+            <x-todo.empty/>
     @endforelse
 @endsection
