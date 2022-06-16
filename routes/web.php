@@ -31,9 +31,9 @@ Route::controller(TodoController::class)
         ->prefix('/todos')
         ->name('todo.')
         ->group(function(){
+            Route::get('/make','make')->name('make');
             Route::get('/{todo}','listOne')->name('listOne');
             Route::get('/','listAll')->name('listAll');
-            Route::get('/make','make')->name('make');
             Route::get('/delete/{id}','delete')->name('delete');
             Route::get('/query','query');
         });
