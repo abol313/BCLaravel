@@ -27,8 +27,8 @@ class TodoController extends Controller{
     }
 
     public function listAll(Request $request){
-        $hostName = $request->getHttpHost();
-        return view('todo.list',['host'=>$hostName]);
+        $todos = Todo::all();
+        return view('todo.list',compact('todos'));
     }
 
     public function make(Request $request){
