@@ -1,9 +1,9 @@
 @props([
+    'id'=> null
     'title' => 'Title',
     'status' => 'Status',
     'description' => 'Description',
     'due' => '2022-12-20 00:00:00',
-    'deletePath' => '#'
 ])
 @php
     if($todo ?? null){
@@ -13,6 +13,8 @@
         $description = $todo->description;
         $due = $todo->due;
     }
+
+    $deletePath = $id? route("route.delete",['id'=>$id]):"#";
 @endphp
 <div  {{ $attributes->class(['todo-item']) }}>
     <x-todo.item.container>
