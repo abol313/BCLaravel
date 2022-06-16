@@ -1,1 +1,1 @@
-<h2>No todo !</h2>
+<h1 class="no-todo-item">No todo !</h1>
