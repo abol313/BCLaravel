@@ -78,7 +78,3 @@ Route::get('/category/{category}',function(Category  $category){
     return $category->value;
 });
 //*/
-
-Route::get('/a/{a}/b/{b}',function ($a,Request $request){
-    return "$a";
-});
