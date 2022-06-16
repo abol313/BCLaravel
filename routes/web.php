@@ -31,13 +31,16 @@ Route::controller(TodoController::class)
         ->prefix('/todos')
         ->name('todo.')
         ->group(function(){
-            Route::get('/{todo}','listOne');
-            Route::get('/','listAll');
-            Route::get('/make','make');
+            Route::get('/{todo}','listOne')->name('listOne');
+            Route::get('/','listAll')->name('listAll');
+            Route::get('/make','make')->name('make');
             Route::get('/delete/{id}','delete')->name('delete');
             Route::get('/query','query');
         });
 
+Route::get('/test',function(Request $request){
+    return dd($request->user());
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
