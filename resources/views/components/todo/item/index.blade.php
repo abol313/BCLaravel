@@ -17,13 +17,13 @@
 
     $deletePath = $id? route("todo.delete",['id'=>$id,'redirectComeBack'=>true]):null;
 @endphp
-<div  {{ $attributes->class(['todo-item']) }}>
+<div  {!! $attributes->class(['todo-item']) !!}>
     <x-todo.item.container>
-        <x-todo.item.title value="{{ $title }}" />
-        <x-todo.item.status value="{{ $status }}" />
+        <x-todo.item.title value="{!! $title !!}" />
+        <x-todo.item.status value="{!! $status !!}" />
         <x-todo.item.description value="{!! $description !!}" />
         @unless(empty($due))
-            <x-todo.item.due value="{{ $due }}" />
+            <x-todo.item.due value="{!! $due !!}" />
         @endunless
         @if($deletePath)
             <x-todo.item.delete :delete-path="$deletePath"/>
