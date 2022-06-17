@@ -16,7 +16,13 @@
     box-shadow:0 0 70px -20px #000;
     color:rgb(var(--focus-color));
 }
-
+@media screen and (max-width:500px) {
+    .todo-item .container{
+        padding:10px;
+        border-radius:30px;
+    }
+    
+}
 
 
 .todo-item .container *{
