@@ -65,7 +65,8 @@ footer{
 }
 footer hr{
     text-align:center;
-    
+    border:none;
+    border-bottom:1px solid cyan;
     margin:0;
     margin-left:auto;
     margin-right:auto;
