@@ -72,7 +72,7 @@ class TodoController extends Controller{
     }
 
     public function delete(Request $request,$id){
-        $redirect = $request->input('redirect');
+        $redirectComeBack = $request->input('redirectComeBack');
         
         $todo = Models\Todo::find($id);
         if(!$todo)
@@ -94,8 +94,8 @@ class TodoController extends Controller{
         }
         $todo->delete();
 
-        if($redirect)
-            return redirect($redirect);
+        if($redirectComeBack)
+            return back();
         return response()->json(['success'=>true,'message'=>'Deleted successfully ;)'
             ,'attributes'=>array_merge(
                 $todo->getAttributes(),
