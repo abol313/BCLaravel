@@ -21,7 +21,7 @@
     <x-todo.item.container>
         <x-todo.item.title value="{{ $title }}" />
         <x-todo.item.status value="{{ $status }}" />
-        <x-todo.item.description value="{{ $description }}" />
+        <x-todo.item.description value="{!! $description !!}" />
         @unless(empty($due))
             <x-todo.item.due value="{{ $due }}" />
         @endunless
