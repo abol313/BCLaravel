@@ -32,16 +32,20 @@ Route::controller(TodoController::class)
         ->name('todo.')
         ->group(function(){
             Route::get('/make','make')->name('make');
+            Route::get('/{todo}/delete','delete')->name('delete');
             Route::get('/{todo}','listOne')->name('listOne');
             Route::get('/','listAll')->name('listAll');
-            Route::get('/delete/{id}','delete')->name('delete');
         });
 
 Route::get('/test',function(Request $request){
-    return dd($request->user());
+    $request->validateWithBag('bagName',
+        [
+            'name'=>'required|min:10|max:20',
+            'id'=>'nullable'
+        ]
+    );
 });
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*practices
