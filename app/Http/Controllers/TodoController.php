@@ -8,18 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class TodoController extends Controller{
 
-    private $validInputs = [
-        'title'=>'required',
-        'description'=>'required',
+    private $makeValidationRules = [
+        'title'=>'required|max:100',
+        'description'=>'nullable',
+        // 'status'=>'nullable',
+        'due'=>'nullable',
         'commander'=>'required',
         'soldier'=>'required'
-    ];
-    private $allInputs = [
-        'title',
-        'description',
-        'due',
-        'commander',
-        'soldier'
     ];
 
     public function listOne(Todo $todo){
@@ -32,7 +27,8 @@ class TodoController extends Controller{
     }
 
     public function make(Request $request){
-        if($request->filled(array_keys($this->validInputs))){
+        dd($request->filled(array_keys($this->makeValidationRules)));
+        if($request->filled(array_keys([]))){
             $response = $this->makeAPI($request);
             return view('todo.make',$response->original);
         }
