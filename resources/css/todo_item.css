@@ -29,6 +29,21 @@
     margin:0;
     padding:10px;
 }
+
+.todo-item .container .delete{
+    padding:0;
+}
+.todo-item .container .delete a{
+    padding:0;
+    height:fit-content;
+    line-height: 0;
+
+}
+.todo-item .container .delete a h2{
+    padding:30px;
+    margin:0;
+}
+
 .todo-item .container *::selection{
     background-color:rgb(var(--focus-color));
     color:rgb(var(--unfocus-color));
