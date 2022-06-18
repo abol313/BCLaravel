@@ -71,10 +71,9 @@ class TodoController extends Controller{
         return response()->json(['success'=>true,'message'=>"The todo successfully created ;)",'attributes'=>$attributes]);
     }
 
-    public function delete(Request $request,$id){
+    public function delete(Request $request,Todo $todo){
         $redirectComeBack = $request->input('redirectComeBack');
         
-        $todo = Models\Todo::find($id);
         if(!$todo)
             return response()->json(['success'=>false,'message'=>'Did not found the todo :/','attributes'=>['id'=>$id]],500);
 
