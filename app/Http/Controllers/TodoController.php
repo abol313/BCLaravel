@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models as Models;
 use App\Models\Todo;
 use App\Models\User;
+use App\Models\UserTodo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class TodoController extends Controller{
 
@@ -26,45 +27,64 @@ class TodoController extends Controller{
         return view('todo.list',compact('todos'));
     }
 
-    public function make(Request $request){
-        dd($request->filled(array_keys($this->makeValidationRules)));
-        if($request->filled(array_keys([]))){
-            $response = $this->makeAPI($request);
-            return view('todo.make',$response->original);
-        }
-        
-
+    public function makeView(){
         return view('todo.make');
     }
 
     public function makeAPI(Request $request){
 
-        $request->validate($this->validInputs);
-        $attributes = $request->only($this->allInputs);
+        $request->validate($this->makeValidationRules);
+        $redirectComeBack = $request->input('redirectComeBack',false);
+        $attributes = $request->only(array_keys($this->makeValidationRules));
+        $todo = new Todo;
+        // dd($todo->getConnection()->getSchemaBuilder()->getColumnListing('todos'));
+        $todo->fillIfPossible($attributes);
 
-        $todo = new Models\Todo;
-        $todo->title = $request->input('title');
-        $todo->description = $request->input('description');
-        $todo->due = $request->input('due');
         $todo->save();
 
-        $userTodo = new Models\UserTodo;
+        $userTodo = new UserTodo;
         $userTodo->todo = $todo->id;
 
         // with unique_name maybe added in future....
         // $commander = Models\User::where('unique_name',str_replace('@','',$request->input('commander')))->first();
         
-        $commander = Models\User::where('email',$request->input('commander'))->first();
-        if(!$commander)return response()->json(['success'=>false,'message'=>"The commander not found :/",'attributes'=>$attributes],500);
+        $commander = User::where('email',$attributes['commander'])->first();
+        $message = ['success'=>false,'message'=>"The commander not found :/",'attributes'=>$attributes];
+        if(!$commander){
+            if($redirectComeBack)
+                return back()->withErrors([
+                    'message'=>'Did not find the commander!',
+                    'errors'=>[
+                        'commander'=>'Did not find the commander!'
+                    ]
+                ]);
+            else
+                return response()->json($message,500);
 
-        $soldier = Models\User::where('email',$request->input('soldier'))->first();
-        if(!$soldier)return response()->json(['success'=>false,'message'=>"The soldier not found :/",'attributes'=>$attributes],500);
-
+        }
+        $soldier = User::where('email',$attributes['soldier'])->first();
+        $message = ['success'=>false,'message'=>"The soldier not found :/",'attributes'=>$attributes];
+        if(!$soldier){
+            if($redirectComeBack)
+                return back()->withErrors([
+                    'message'=>'Did not find the soldier!',
+                    'errors'=>[
+                        'soldier'=>'Did not find the soldier!'
+                    ]
+                ]);
+            else
+                return response()->json($message,500);
+        }
         $userTodo->commander = $commander->id;
         $userTodo->soldier = $soldier->id;
         $userTodo->save();
 
-        return response()->json(['success'=>true,'message'=>"The todo successfully created ;)",'attributes'=>$attributes]);
+        $message = ['success'=>true,'message'=>"The todo successfully created ;)",'attributes'=>$attributes];
+        if($redirectComeBack){
+            $request->session()->flash('report',$message);
+            return back();
+        }
+        return response()->json($message);
     }
 
     public function delete(Request $request,Todo $todo){
