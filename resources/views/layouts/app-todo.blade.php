@@ -30,10 +30,11 @@
             </ul>
         </nav>
     </header>
-    @section('body')
-        <h1>Welcome to the Laravel</h1>
-    @show
-    @yield('content')
+    <main>
+        @section('body')
+            <h1>Welcome to the Laravel</h1>
+        @show
+    </main>
     <footer>
         <hr/>
         <h1>Made with interseting ;)</h1>
