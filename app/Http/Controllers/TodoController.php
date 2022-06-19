@@ -41,22 +41,12 @@ class TodoController extends Controller{
         $commander = User::where('email',$attributes['commander'])->first();
         $message = ['success'=>false,'message'=>"The commander not found :/",'attributes'=>$attributes];
         if(!$commander)
-            return back()->withErrors([
-                    'message'=>'Did not find the commander!',
-                    'errors'=>[
-                        'commander'=>'Did not find the commander!'
-                    ]
-            ]);
+            return back()->withErrors(['commander'=>'Did not find the commander!']);
         
         $soldier = User::where('email',$attributes['soldier'])->first();
         $message = ['success'=>false,'message'=>"The soldier not found :/",'attributes'=>$attributes];
         if(!$soldier)
-            return back()->withErrors([
-                'message'=>'Did not find the soldier!',
-                'errors'=>[
-                    'soldier'=>'Did not find the soldier!'
-                ]
-            ]);
+            return back()->withErrors(['soldier'=>'Did not find the soldier!']);
 
         $userTodo->commander = $commander->id;
         $userTodo->soldier = $soldier->id;
@@ -99,6 +89,36 @@ class TodoController extends Controller{
 
     public function editAPI(MakeTodoRequest $request,Todo $todo){
         //title, description, due, commander, soldier
+
+        $todo->fill($request->safe()->except(['commander','soldier']));
+        $todo->save();
+
+        $commander = $request->validated()['commander'];
+        $soldier = $request->validated()['soldier'];
+
+        $commander = User::where('email',$commander)->first();
+        if(!$commander)
+            return back()->withErrors(['commander'=> 'The commander not found!']);
+        $commander = $commander->id;
         
+        $soldier = User::where('email',$soldier)->first();
+        if(!$soldier)
+            return back()->withErrors(['soldier'=> 'The soldier not found!']);
+
+        $soldier = $soldier->id;
+    
+
+        $userTodo = UserTodo::where('todo',$todo->id)->first();
+        if(!$userTodo)
+            return back()->withErrors('The UserTodo not found!');
+        
+        if($commander !== null)$userTodo->commander = $commander;
+        if($soldier !== null)$userTodo->soldier = $soldier;
+
+        $userTodo->save();
+
+        $request->session()->flash('report',['success'=>true,'message'=>'The todo edited successfully!']);
+        return back();
+
     }
 }
