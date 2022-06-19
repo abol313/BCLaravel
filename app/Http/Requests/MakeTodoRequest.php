@@ -8,14 +8,16 @@ class MakeTodoRequest extends FormRequest
 {
 
     private $makeValidationRules = [
-        'title'=>'required|max:100',
-        'description'=>'nullable',
+        'title'=>'required|between:5,100',
+        'description'=>'nullable|max:65535',
         // 'status'=>'nullable',
-        'due'=>'nullable',
-        'commander'=>'required',
-        'soldier'=>'required'
+        'due'=>'nullable|date|after:now',
+        'commander'=>'required|email',
+        'soldier'=>'required|email'
     ];
 
+
+    protected $stopOnFirstFailure = false;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +27,18 @@ class MakeTodoRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+
+    public function withValidator($validator){
+        // dump($this->all());
+        // $validator->errors()->add('err2','eeerrr :/');
+
+        // $validator->after(function($validator){
+        //     $validator->errors()->add('err','eeerrr :/');
+        //     $validator->errors()->add('err2','eeerrr :/');
+        //     dump("after");
+        // });
     }
 
     /**
