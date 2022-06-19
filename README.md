@@ -18,8 +18,11 @@ For any todo considered:
 
 You can list/make :
 list ui:
-<img src="shots/todo_list.png"/>
+<img src="shots/todo_list1.png"/>
 
 make ui:
 <img src="shots/todo_make.png"/>
+
+edit ui:
+<img src="shots/todo_edit.png"/>
 </pre>
