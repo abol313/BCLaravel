@@ -30,20 +30,6 @@
     padding:10px;
 }
 
-.todo-item .container .delete{
-    padding:0;
-}
-.todo-item .container .delete a{
-    padding:0;
-    height:fit-content;
-    line-height: 0;
-
-}
-.todo-item .container .delete a h2{
-    padding:30px;
-    margin:0;
-}
-
 .todo-item .container *::selection{
     background-color:rgb(var(--focus-color));
     color:rgb(var(--unfocus-color));
@@ -88,10 +74,31 @@
     background-color:rgb(var(--unfocus-color));
 }
 
-.todo-item .container .delete{
-    width:100%;
-    background-color:rgb(var(--danger-color));
+.todo-item .container .delete {
+    width: 100%;
+    background-color: rgb(var(--danger-color))
 }
+
+.todo-item .container .edit {
+    width: 100%;
+    background-color: rgb(var(--warning-color))
+}
+
+.todo-item .container .delete ,.todo-item .container .edit {
+    padding: 0
+}
+
+.todo-item .container .delete a ,.todo-item .container .edit a{
+    padding: 0;
+    height: fit-content;
+    line-height: 0
+}
+
+.todo-item .container .delete a h2 ,.todo-item .container .edit a h2{
+    padding: 30px;
+    margin: 0
+}
+
 .no-todo-item {
     align-self:center;
 }
