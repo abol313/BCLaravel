@@ -55,7 +55,6 @@
             @endForeach
         </datalist>
 
-        <input type="hidden" name="redirectComeBack" value="true"/>
         <input type="reset" class="reset" value="Clean"/>
         <input type="submit" class="submit" value="Make !" />
     </form>

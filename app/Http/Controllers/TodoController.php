@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Todo;
 use App\Models\User;
 use App\Models\UserTodo;
+use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller{
 
@@ -24,7 +25,6 @@ class TodoController extends Controller{
 
     public function makeAPI(MakeTodoRequest $request){
 
-        $redirectComeBack = $request->input('redirectComeBack',false);
         $attributes = $request->validated();
         $todo = new Todo;
 
@@ -40,52 +40,39 @@ class TodoController extends Controller{
         
         $commander = User::where('email',$attributes['commander'])->first();
         $message = ['success'=>false,'message'=>"The commander not found :/",'attributes'=>$attributes];
-        if(!$commander){
-            if($redirectComeBack)
-                return back()->withErrors([
+        if(!$commander)
+            return back()->withErrors([
                     'message'=>'Did not find the commander!',
                     'errors'=>[
                         'commander'=>'Did not find the commander!'
                     ]
-                ]);
-            else
-                return response()->json($message,500);
-
-        }
+            ]);
+        
         $soldier = User::where('email',$attributes['soldier'])->first();
         $message = ['success'=>false,'message'=>"The soldier not found :/",'attributes'=>$attributes];
-        if(!$soldier){
-            if($redirectComeBack)
-                return back()->withErrors([
-                    'message'=>'Did not find the soldier!',
-                    'errors'=>[
-                        'soldier'=>'Did not find the soldier!'
-                    ]
-                ]);
-            else
-                return response()->json($message,500);
-        }
+        if(!$soldier)
+            return back()->withErrors([
+                'message'=>'Did not find the soldier!',
+                'errors'=>[
+                    'soldier'=>'Did not find the soldier!'
+                ]
+            ]);
+
         $userTodo->commander = $commander->id;
         $userTodo->soldier = $soldier->id;
         $userTodo->save();
 
         $message = ['success'=>true,'message'=>"The todo successfully created ;)",'attributes'=>$attributes];
-        if($redirectComeBack){
-            $request->session()->flash('report',$message);
-            return back();
-        }
-        return response()->json($message);
+        
+        $request->session()->flash('report',$message);
+        return back();
     }
 
     public function delete(Request $request,Todo $todo){
-        $redirectComeBack = $request->input('redirectComeBack');
         
-        if(!$todo)
-            return response()->json(['success'=>false,'message'=>'Did not found the todo :/','attributes'=>['id'=>$id]],500);
-
-        $usersTodos = UserTodo::where('todo',$id)->get();
+        $usersTodos = UserTodo::where('todo',$todo->id)->get();
         if(!$usersTodos)
-            return response()->json(['success'=>false,'message'=>'Did not found the todo :/','attributes'=>['id'=>$id]],500);
+            return back()->withErrors("Did not found the todo :/");
         
         $commanders = [];
         $soldiers = [];
@@ -99,17 +86,19 @@ class TodoController extends Controller{
         }
         $todo->delete();
 
-        if($redirectComeBack)
-            return back();
-        return response()->json(['success'=>true,'message'=>'Deleted successfully ;)'
-            ,'attributes'=>array_merge(
-                $todo->getAttributes(),
-                [
-                    'commanders'=>$commanders,
-                    'soldiers'=>$soldiers
-                ]
-            )
-        ],500);
+        $request->session()->flash('report',['success'=>true,'message'=>'The todo deleted successfully!']);
+        return back();
+    }
+
+    public function editView(Todo $todo){
+        $userTodo = UserTodo::where('todo',$todo->id)->first();
+        $commander = User::find($userTodo->commander)->email;
+        $soldier = User::find($userTodo->soldier)->email;
+        return view('todo.edit',['todo'=>$todo,'commander'=>$commander,'soldier'=>$soldier]);
+    }
+
+    public function editAPI(MakeTodoRequest $request,Todo $todo){
+        //title, description, due, commander, soldier
         
     }
 }
