@@ -24,8 +24,6 @@ class TodoController extends Controller{
 
     public function makeAPI(MakeTodoRequest $request){
 
-        $request->validate();
-
         $redirectComeBack = $request->input('redirectComeBack',false);
         $attributes = $request->validated();
         $todo = new Todo;
