@@ -26,7 +26,7 @@
         <nav>
             <ul class="hypers">
                 <a href="{{route('todo.listAll')}}"><li><h2>List</h2></li></a>
-                <a href="{{route('todo.make')}}"><li><h2>Make</h2></li></a>
+                <a href="{{route('todo.makeView')}}"><li><h2>Make</h2></li></a>
             </ul>
         </nav>
     </header>
