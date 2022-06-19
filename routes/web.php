@@ -10,6 +10,8 @@ use Illuminate\Http\Response;
 // use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
+
 // use phpDocumentor\Reflection\Types\Boolean;
 
 /*
@@ -32,19 +34,25 @@ Route::controller(TodoController::class)
         ->name('todo.')
         ->group(function(){
             Route::get('/','listAll')->name('listAll');
+
+            Route::get('/{todo}/edit','editView')->name('editView');
+            Route::post('/{todo}/edit','editAPI')->name('editAPI');
+
             Route::get('/make','makeView')->name('makeView');
             Route::post('/make','makeAPI')->name('makeAPI');
+
             Route::get('/{todo}/delete','delete')->name('delete');
+
             Route::get('/{todo}','listOne')->name('listOne');
+
         });
 
 Route::get('/test',function(Request $request){
-    $request->validateWithBag('bagName',
-        [
-            'name'=>'required|min:10|max:20',
-            'id'=>'nullable'
-        ]
-    );
+    $validator = Validator::make(['name'=>'ali10'],[
+        'name'=>'required|integer'
+    ]);
+    $validator->stopOnFirstFailure();
+    dd($validator);
 });
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
