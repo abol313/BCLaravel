@@ -53,6 +53,11 @@ nav .hypers > *{
     width:100px;
 }
 
+main{
+    flex-grow:1;
+    height:200px;
+}
+
 footer{
     align-self:stretch;
     text-align:center;
