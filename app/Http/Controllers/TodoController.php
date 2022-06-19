@@ -4,8 +4,6 @@ use Illuminate\Http\Request;
 use App\Models\Todo;
 use App\Models\User;
 use App\Models\UserTodo;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 
 class TodoController extends Controller{
 
@@ -93,7 +91,7 @@ class TodoController extends Controller{
         if(!$todo)
             return response()->json(['success'=>false,'message'=>'Did not found the todo :/','attributes'=>['id'=>$id]],500);
 
-        $usersTodos = Models\UserTodo::where('todo',$id)->get();
+        $usersTodos = UserTodo::where('todo',$id)->get();
         if(!$usersTodos)
             return response()->json(['success'=>false,'message'=>'Did not found the todo :/','attributes'=>['id'=>$id]],500);
         
@@ -101,8 +99,8 @@ class TodoController extends Controller{
         $soldiers = [];
         foreach($usersTodos as $userTodo){
             $userTodo->delete();
-            $commander = Models\User::find($userTodo->commander);
-            $soldier = Models\User::find($userTodo->soldier);
+            $commander = User::find($userTodo->commander);
+            $soldier = User::find($userTodo->soldier);
             
             array_push($commanders,$commander->id);
             array_push($soldiers,$soldier->id);
