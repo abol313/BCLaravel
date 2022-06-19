@@ -15,7 +15,7 @@
         $due = $todo->due;
     }
 
-    $deletePath = $id? route("todo.delete",['id'=>$id,'redirectComeBack'=>true]):null;
+    $deletePath = $id? route("todo.delete",['todo'=>$todo,'redirectComeBack'=>true]):null;
 @endphp
 <div  {!! $attributes->class(['todo-item']) !!}>
     <x-todo.item.container>
