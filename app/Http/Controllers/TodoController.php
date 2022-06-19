@@ -93,18 +93,23 @@ class TodoController extends Controller{
         $todo->fill($request->safe()->except(['commander','soldier']));
         $todo->save();
 
-        $commander = $request->validated()['commander'];
-        $soldier = $request->validated()['soldier'];
+        $commanderEmail = $request->validated()['commander'];
+        $soldierEmail = $request->validated()['soldier'];
 
-        $commander = User::where('email',$commander)->first();
-        if(!$commander)
+        $commander = User::where('email',$commanderEmail)->first();
+        if(!$commander){
+            $request->session()->flash('_old_input.commander',$commanderEmail);
+            // dd($commanderEmail);
             return back()->withErrors(['commander'=> 'The commander not found!']);
+        }
+
         $commander = $commander->id;
         
-        $soldier = User::where('email',$soldier)->first();
-        if(!$soldier)
+        $soldier = User::where('email',$soldierEmail)->first();
+        if(!$soldier){
+            $request->session()->flash('_old_input.soldier',$soldierEmail);
             return back()->withErrors(['soldier'=> 'The soldier not found!']);
-
+        }
         $soldier = $soldier->id;
     
 
