@@ -1,20 +1,13 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Http\Requests\MakeTodoRequest;
 use Illuminate\Http\Request;
 use App\Models\Todo;
 use App\Models\User;
 use App\Models\UserTodo;
 
 class TodoController extends Controller{
-
-    private $makeValidationRules = [
-        'title'=>'required|max:100',
-        'description'=>'nullable',
-        // 'status'=>'nullable',
-        'due'=>'nullable',
-        'commander'=>'required',
-        'soldier'=>'required'
-    ];
 
     public function listOne(Todo $todo){
         return view('todo.todo',['todo'=>$todo]);
@@ -29,13 +22,14 @@ class TodoController extends Controller{
         return view('todo.make');
     }
 
-    public function makeAPI(Request $request){
+    public function makeAPI(MakeTodoRequest $request){
 
-        $request->validate($this->makeValidationRules);
+        $request->validate();
+
         $redirectComeBack = $request->input('redirectComeBack',false);
-        $attributes = $request->only(array_keys($this->makeValidationRules));
+        $attributes = $request->validated();
         $todo = new Todo;
-        // dd($todo->getConnection()->getSchemaBuilder()->getColumnListing('todos'));
+
         $todo->fillIfPossible($attributes);
 
         $todo->save();

@@ -6,6 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class MakeTodoRequest extends FormRequest
 {
+
+    private $makeValidationRules = [
+        'title'=>'required|max:100',
+        'description'=>'nullable',
+        // 'status'=>'nullable',
+        'due'=>'nullable',
+        'commander'=>'required',
+        'soldier'=>'required'
+    ];
+
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +24,7 @@ class MakeTodoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +34,6 @@ class MakeTodoRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return $this->makeValidationRules;
     }
 }
