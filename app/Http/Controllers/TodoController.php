@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditTodoRequest;
 use App\Http\Requests\MakeTodoRequest;
 use Illuminate\Http\Request;
 use App\Models\Todo;
@@ -26,34 +27,11 @@ class TodoController extends Controller{
     public function makeAPI(MakeTodoRequest $request){
 
         $attributes = $request->validated();
-        $todo = new Todo;
 
-        $todo->fillIfPossible($attributes);
-
-        $todo->save();
-
-        $userTodo = new UserTodo;
-        $userTodo->todo = $todo->id;
-
-        // with unique_name maybe added in future....
-        // $commander = Models\User::where('unique_name',str_replace('@','',$request->input('commander')))->first();
-        
-        $commander = User::where('email',$attributes['commander'])->first();
-        $message = ['success'=>false,'message'=>"The commander not found :/",'attributes'=>$attributes];
-        if(!$commander)
-            return back()->withErrors(['commander'=>'Did not find the commander!']);
-        
-        $soldier = User::where('email',$attributes['soldier'])->first();
-        $message = ['success'=>false,'message'=>"The soldier not found :/",'attributes'=>$attributes];
-        if(!$soldier)
-            return back()->withErrors(['soldier'=>'Did not find the soldier!']);
-
-        $userTodo->commander = $commander->id;
-        $userTodo->soldier = $soldier->id;
-        $userTodo->save();
+        Todo::makeTodo($attributes);
 
         $message = ['success'=>true,'message'=>"The todo successfully created ;)",'attributes'=>$attributes];
-        
+
         $request->session()->flash('report',$message);
         return back();
     }
@@ -81,47 +59,16 @@ class TodoController extends Controller{
     }
 
     public function editView(Todo $todo){
-        $userTodo = UserTodo::where('todo',$todo->id)->first();
-        $commander = User::find($userTodo->commander)->email;
-        $soldier = User::find($userTodo->soldier)->email;
-        return view('todo.edit',['todo'=>$todo,'commander'=>$commander,'soldier'=>$soldier]);
+        return view('todo.edit',['todo'=>$todo,'commander'=>($todo->getCommander()?->email),'soldier'=>($todo->getSoldier()?->email)]);
     }
 
-    public function editAPI(MakeTodoRequest $request,Todo $todo){
-        //title, description, due, commander, soldier
-
-        $todo->fill($request->safe()->except(['commander','soldier']));
-        $todo->save();
-
-        $commanderEmail = $request->validated()['commander'];
-        $soldierEmail = $request->validated()['soldier'];
-
-        $commander = User::where('email',$commanderEmail)->first();
-        if(!$commander){
-            $request->session()->flash('_old_input.commander',$commanderEmail);
-            // dd($commanderEmail);
-            return back()->withErrors(['commander'=> 'The commander not found!']);
-        }
-
-        $commander = $commander->id;
+    public function editAPI(EditTodoRequest $request,Todo $todo){
         
-        $soldier = User::where('email',$soldierEmail)->first();
-        if(!$soldier){
-            $request->session()->flash('_old_input.soldier',$soldierEmail);
-            return back()->withErrors(['soldier'=> 'The soldier not found!']);
-        }
-        $soldier = $soldier->id;
-    
-
-        $userTodo = UserTodo::where('todo',$todo->id)->first();
-        if(!$userTodo)
+        if(!$todo->hasRelationToUsers())
             return back()->withErrors('The UserTodo not found!');
+
+        Todo::editTodo($todo,$request->validated());
         
-        if($commander !== null)$userTodo->commander = $commander;
-        if($soldier !== null)$userTodo->soldier = $soldier;
-
-        $userTodo->save();
-
         $request->session()->flash('report',['success'=>true,'message'=>'The todo edited successfully!']);
         return back();
 
