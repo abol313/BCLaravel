@@ -12,8 +12,8 @@ class MakeTodoRequest extends FormRequest
         'description'=>'nullable|max:65535',
         // 'status'=>'nullable',
         'due'=>'nullable|date|after:now',
-        'commander'=>'required|email',
-        'soldier'=>'required|email'
+        'commander'=>'required|email|exists:users,email',
+        'soldier'=>'required|email|exists:users,email'
     ];
 
 
