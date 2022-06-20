@@ -11,6 +11,7 @@ body{
 
 .form-todo-make-title{
     z-index:2;
+    text-align:center;
 }
 
 .todo-message{
