@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             TodoSeeder::class,
+            UserSeeder::class,
+            UserTodo::class
         ]);
     }
 }
