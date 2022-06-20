@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\UserTodo;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Todo;
 use Illuminate\Database\Seeder;
 
 class UserTodoSeeder extends Seeder
@@ -16,6 +16,8 @@ class UserTodoSeeder extends Seeder
     public function run()
     {
         //
-        UserTodo::factory(20)->create();
+        foreach(Todo::all() as $todo)
+            if(!$todo->hasRelationToUsers())
+                UserTodo::factory(1)->createOne(['todo'=>$todo->id]);
     }
 }
