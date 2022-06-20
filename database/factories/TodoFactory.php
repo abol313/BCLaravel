@@ -19,10 +19,10 @@ class TodoFactory extends Factory
         
         return [
             //
-            'title'=>$this->faker->title(),
-            'description'=>$this->faker->text(),
+            'title'=>$this->faker->realTextBetween(5,12),
+            'description'=>$this->faker->realTextBetween(20,300),
             'status'=>$this->faker->randomElement(['waiting','accepted','declined','done']),
-            'due'=>$this->faker->dateTimeThisYear()
+            'due'=>$this->faker->dateTimeBetween('now','+1 year')
         ];
     }
 
