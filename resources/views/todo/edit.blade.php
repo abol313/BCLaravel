@@ -30,6 +30,7 @@
             @endforeach
         </div>
     @endif
+    
     <form action="{{route('todo.editAPI',[$todo])}}" method="post" class="form-todo-make">
         @csrf
         <label for="input_title" class="label-title" >Title</label>
@@ -39,7 +40,7 @@
         <textarea id="textarea_description" name="description" class="textarea-description custom-scroll" rows="5" placeholder="Give descriptions..." required>{{$attributes['description'] ?? old('description') ?? $todo->getAttribute('description')}}</textarea>
 
         <label for="input_due" class="label-due">Due (time)</label>
-        <input id="input_due" name="due" type="datetime-local" class="input-due" placeholder="Set the time should to be done" value="{{($attributes['due'] ?? old('due')) ?? $todo->getAttribute('due')}}"/>
+        <input id="input_due" name="due" type="datetime-local" class="input-due" placeholder="Set the time should to be done" value="{{str_replace(' ','T',$attributes['due'] ?? old('due') ?? $todo->getAttribute('due'))}}"/>
 
         <label for="input_commander" class="label-commander">Commander</label>
         {{-- <input id="input_commander" name="commander" list="list_users" class="input-commander" placeholder="@@Set the commander (whos make this todo)" pattern="@.*" title="unique name must be started with @ character" value="{{$attributes['commander'] ?? null}}" required/> --}}
