@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Todo;
+use App\Models\User;
+use App\Models\UserTodo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TodoSeeder extends Seeder
 {
@@ -16,6 +19,6 @@ class TodoSeeder extends Seeder
     public function run()
     {
         //
-        Todo::factory(10)->create();
+        Todo::factory(20)->create();
     }
 }
