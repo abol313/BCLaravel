@@ -1,0 +1,7 @@
+{
+    "platform": "laravel",
+    "app": "abol",
+    "laravel": {
+        "phpVersion": "8.1"
+    }
+}
