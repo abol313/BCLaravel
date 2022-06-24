@@ -37,7 +37,7 @@ body{
 
 .form-todo-make{
     width:400px;
-    max-width:90%;
+    max-width:80vw;
     padding:20px;
     border-radius:20px;
     background-color:rgba(var(--focus-color),.5);
