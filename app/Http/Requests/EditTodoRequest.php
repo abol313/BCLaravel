@@ -8,8 +8,8 @@ class EditTodoRequest extends FormRequest
 {
 
     private $editValidationRules = [
-        'title'=>'required|between:5,100',
-        'description'=>'nullable|max:65535',
+        'title'=>'required|string|between:5,100',
+        'description'=>'nullable|string|max:65535',
         // 'status'=>'nullable',
         'due'=>'nullable|date|after:now',
         'commander'=>'required|email|exists:users,email',
