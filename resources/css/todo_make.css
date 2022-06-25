@@ -34,6 +34,10 @@ body{
     color:rgb(var(--todo-message-unsucceed-focus-color));
 }
 
+.validation-error{
+    border-color:rgb(var(--danger-color));
+    color:rgb(var(--danger-color));
+}
 
 .form-todo-make{
     width:400px;
@@ -84,3 +88,17 @@ body{
     background-color:rgb(var(--warning-color));
 }
 
+.message-validation-error{
+    margin-top:-10px;
+    margin-bottom:10px;
+    
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    background-color: rgba(var(--todo-message-unsucceed-unfocus-color), .9);
+    color: rgb(var(--todo-message-unsucceed-focus-color))
+}
+
+.input-validation-error{
+    border-color:rgb(var(--danger-color)) !important;
+    color:rgb(var(--danger-color)) !important;
+}
