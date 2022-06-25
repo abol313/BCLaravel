@@ -66,7 +66,7 @@
 }
 
 .todo-item .container .description::-webkit-scrollbar{
-    width:40px;
+    width:10px;
 }
 .todo-item .container .description::-webkit-scrollbar-thumb{
     background-color:rgba(var(--unfocus-color),.3);
