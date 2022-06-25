@@ -33,11 +33,11 @@ Route::controller(TodoController::class)
         ->group(function(){
             Route::get('/','listAll')->name('listAll');
 
-            Route::get('/{todo}/edit','editView')->name('editView');
-            Route::post('/{todo}/edit','editAPI')->name('editAPI');
+            Route::get('/{todo}/edit','edit')->name('edit');
+            Route::post('/{todo}/update','update')->name('update');
 
-            Route::get('/make','makeView')->name('makeView');
-            Route::post('/make','makeAPI')->name('makeAPI');
+            Route::get('/create','create')->name('create');
+            Route::post('/store','store')->name('store');
 
             Route::get('/{todo}/delete','delete')->name('delete');
 

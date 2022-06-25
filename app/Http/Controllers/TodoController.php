@@ -20,11 +20,11 @@ class TodoController extends Controller{
         return view('todo.list',compact('todos'));
     }
 
-    public function makeView(){
+    public function create(){
         return view('todo.make');
     }
 
-    public function makeAPI(MakeTodoRequest $request){
+    public function store(MakeTodoRequest $request){
 
         $attributes = $request->validated();
 
@@ -58,11 +58,11 @@ class TodoController extends Controller{
         return back();
     }
 
-    public function editView(Todo $todo){
+    public function edit(Todo $todo){
         return view('todo.edit',['todo'=>$todo,'commander'=>($todo->getCommander()?->email),'soldier'=>($todo->getSoldier()?->email)]);
     }
 
-    public function editAPI(EditTodoRequest $request,Todo $todo){
+    public function update(EditTodoRequest $request,Todo $todo){
         
         if(!$todo->hasRelationToUsers())
             return back()->withErrors('The UserTodo not found!');

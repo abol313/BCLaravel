@@ -16,7 +16,7 @@
     }
 
     $deletePath = $id? route("todo.delete",['todo'=>$todo]):null;
-    $editPath = $id? route("todo.editView",[$todo]):null;
+    $editPath = $id? route("todo.edit",[$todo]):null;
 @endphp
 <div  {!! $attributes->class(['todo-item']) !!}>
     <x-todo.item.container>

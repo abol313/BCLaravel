@@ -29,7 +29,7 @@
             @endforeach
         </div>
     @endif
-    <form action="{{route('todo.makeAPI')}}" method="post" class="form-todo-make">
+    <form action="{{route('todo.store')}}" method="post" class="form-todo-make">
         @csrf
         <label for="input_title" class="label-title" >Title</label>
         <input id="input_title" name="title" class="input-title" placeholder="Choose your title of todo" value="{{$attributes['title'] ?? old('title')}}" required/>
