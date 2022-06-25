@@ -68,6 +68,9 @@
 .todo-item .container .description::-webkit-scrollbar{
     width:10px;
 }
+.todo-item .container .description::-webkit-scrollbar-track{
+    margin:40px;
+}
 .todo-item .container .description::-webkit-scrollbar-thumb{
     background-color:rgba(var(--unfocus-color),.3);
     border-radius:20px;
