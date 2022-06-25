@@ -42,6 +42,7 @@
 }
 
 .todo-item .container .title {
+    word-break: break-all;
     flex-grow:1;
     background:none;
     color:rgb(var(--focus-color));
@@ -53,6 +54,7 @@
 }
 
 .todo-item .container .description {
+    word-break: break-all;
     width:100%;
     min-height:100px;
     height:auto;
