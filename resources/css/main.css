@@ -94,7 +94,7 @@ footer:hover hr{
 }
 
 body::-webkit-scrollbar{
-    width:20px;
+    width:10px;
 }
 body::-webkit-scrollbar-thumb{
     background-color:rgba(var(--unfocus-color),.5);
@@ -108,7 +108,7 @@ body::-webkit-scrollbar-thumb:active{
     width:0px;
 }
 .custom-scroll::-webkit-scrollbar{
-    width:20px;
+    width:10px;
 }
 .custom-scroll::-webkit-scrollbar-thumb{
     background-color:rgba(var(--unfocus-color),.5);
