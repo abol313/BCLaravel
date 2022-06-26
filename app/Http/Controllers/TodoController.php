@@ -30,7 +30,7 @@ class TodoController extends Controller{
 
         Todo::makeTodo($attributes);
 
-        $message = ['success'=>true,'message'=>"The todo successfully created ;)",'attributes'=>$attributes];
+        $message = ['success'=>true,'message'=>__("todo.controller.todo.create"),'attributes'=>$attributes];
 
         $request->session()->flash('report',$message);
         return back();
@@ -40,7 +40,7 @@ class TodoController extends Controller{
         
         $usersTodos = UserTodo::where('todo',$todo->id)->get();
         if(!$usersTodos)
-            return back()->withErrors("Did not found the todo :/");
+            return back()->withErrors(__("todo.no_user_todo"));
         
         $commanders = [];
         $soldiers = [];
@@ -54,7 +54,7 @@ class TodoController extends Controller{
         }
         $todo->delete();
 
-        $request->session()->flash('report',['success'=>true,'message'=>'The todo deleted successfully!']);
+        $request->session()->flash('report',['success'=>true,'message'=>__("todo.controller.todo.delete")]);
         return back();
     }
 
@@ -65,11 +65,11 @@ class TodoController extends Controller{
     public function update(EditTodoRequest $request,Todo $todo){
         
         if(!$todo->hasRelationToUsers())
-            return back()->withErrors('The UserTodo not found!');
+            return back()->withErrors(__("todo.no_user_todo"));
 
         Todo::editTodo($todo,$request->validated());
         
-        $request->session()->flash('report',['success'=>true,'message'=>'The todo edited successfully!']);
+        $request->session()->flash('report',['success'=>true,'message'=>__("todo.controller.todo.edit")]);
         return back();
 
     }
