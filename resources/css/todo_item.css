@@ -50,7 +50,7 @@
 
 .todo-item .container .status {
     text-align:center;
-    flex-grow:0;
+    flex-grow:1;
 }
 
 .todo-item .container .description {
