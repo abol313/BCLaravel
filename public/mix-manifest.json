@@ -1,6 +1,7 @@
 {
-    "/js/app.js": "/js/app.js?id=eee9aad2755c6828805ae8632d22a40b",
-    "/css/app.css": "/css/app.css?id=4d3efe739be91c4a0ae1657c5785b159",
-    "/css/todo_app.css": "/css/todo_app.css?id=26f5b65d79f6d1f71943f7860bd763eb",
-    "/images/todo_icon.png": "/images/todo_icon.png?id=59f4fc7dbf419d749dc8c745a59295f4"
+    "/images/todo_icon.png": "/images/todo_icon.png?id=59f4fc7dbf419d749dc8c745a59295f4",
+    "/fonts/digi_sarve_naz/Digi_Sarvenaz.otf": "/fonts/digi_sarve_naz/Digi_Sarvenaz.otf?id=34e4a3164e9af7bb2c2d13500c124d81",
+    "/fonts/digi_sarve_naz/Digi_Sarvenaz.ttf": "/fonts/digi_sarve_naz/Digi_Sarvenaz.ttf?id=34e4a3164e9af7bb2c2d13500c124d81",
+    "/css/todo_app.css": "/css/todo_app.css?id=47a6041771fc140c40a4e5f86f36ff61",
+    "/css/lang_fa.css": "/css/lang_fa.css?id=091b7c0d3c8580bea17c653e2294495e"
 }
