@@ -1,0 +1,12 @@
+
+body{
+    direction:rtl;
+}
+
+header .languages{
+    flex-direction:row-reverse !important;
+}
+
+*{
+    font-family:'Sarve Naz',cursive;
+}
