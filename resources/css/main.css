@@ -64,6 +64,7 @@ main{
 }
 
 footer{
+    user-select: none;
     align-self:stretch;
     text-align:center;
     box-sizing:border-box;
