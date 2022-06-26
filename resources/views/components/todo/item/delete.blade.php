@@ -1,8 +1,8 @@
 @aware(['deletePath'])
 <div class="delete">
-    <a href="{{$deletePath}}" onclick="return confirm('Are you sure to delete?')">
+    <a href="{{$deletePath}}" onclick="return confirm({{__("todo.sure")}})">
         <h2>
-            Delete
+            @lang("todo.todo.delete")
         </h2>
     </a>
 </div>

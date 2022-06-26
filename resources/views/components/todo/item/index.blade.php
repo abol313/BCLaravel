@@ -22,7 +22,7 @@
     <x-todo.item.container>
         <x-todo.item.title value="{!! $title !!}" />
 
-        <x-todo.item.status value="{!! $status !!}" />
+        <x-todo.item.status value='{!! __("todo.todo.status.$status") !!}' />
 
         <x-todo.item.description value="{!! $description !!}" />
 

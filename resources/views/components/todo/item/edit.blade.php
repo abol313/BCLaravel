@@ -2,7 +2,7 @@
 <div class="edit">
     <a href="{{$editPath}}">
         <h2>
-            Edit
+            @lang("todo.todo.edit")
         </h2>
     </a>
 </div>

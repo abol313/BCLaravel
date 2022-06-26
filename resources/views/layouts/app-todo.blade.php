@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title','Todo Collection')</title>
+    <title>@yield('title',__("todo.title"))</title>
 
     <!--site-icon-->
     <link rel="shortcut icon" href="{{mix('images/todo_icon.png')}}"/>
@@ -17,16 +17,25 @@
 
     <!--styles-->
     <link rel="stylesheet" href="{{mix('css/todo_app.css')}}"/>
+    @if($locale==="fa" || 0)
+        <link rel="stylesheet" href="{{mix('css/lang_fa.css')}}"/>
+    @endif
     @stack('styles')
 
 </head>
 <body>
     <header>
-        <h1>Welcome to Todo-Collection</h1>
+        <div>
+            <h1>@lang("todo.welcome")</h1>
+            <div class="languages">
+                <a href="{{route('setLocale',['locale'=>'fa'])}}" @if($locale==="fa") class="enabled" @endif>فا</a>
+                <a href="{{route('setLocale',['locale'=>'en'])}}" @if($locale==="en") class="enabled" @endif>en</a>
+            </div>
+        </div>
         <nav>
             <ul class="hypers">
-                <a href="{{route('todo.listAll')}}"><li><h2>List</h2></li></a>
-                <a href="{{route('todo.create')}}"><li><h2>Make</h2></li></a>
+                <a href="{{route('todo.listAll')}}"><li><h2>@lang("todo.list")</h2></li></a>
+                <a href="{{route('todo.create')}}"><li><h2>@lang("todo.make")</h2></li></a>
             </ul>
         </nav>
     </header>
@@ -37,7 +46,7 @@
     </main>
     <footer>
         <hr/>
-        <h1>Made with interseting ;)</h1>
+        <h1>@lang("todo.made")</h1>
     </footer>
 </body>
 </html>

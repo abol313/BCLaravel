@@ -6,6 +6,6 @@
     @if($todo)
         <x-todo.item :todo="$todo"/>
     @else
-        <h1 class="no-todo-item">No todo !</h1>
+        <h1 class="no-todo-item">@lang("todo.no_todo")</h1>
     @endif
 @endsection
