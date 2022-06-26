@@ -44,7 +44,7 @@
         @enderror
 
         <label for="input_due" class="label-due">Due (time)</label>
-        <input id="input_due" name="due" type="datetime-local" class="input-due @error('due') input-validation-error  @enderror" placeholder="Set the time should to be done" value="{{str_replace(' ','T',$attributes['due'] ?? old('due') ?? $todo->getAttribute('due'))}}"/>
+        <input id="input_due" name="due" type="datetime-local" class="input-due @error('due') input-validation-error  @enderror" placeholder="Set the time should to be done" value="{{str_replace(' ','T',$attributes['due'] ?? old('due') ?? $todo->getAttribute('due'))}}" step="any"/>
         @error('due')
             <div class="todo-message message-validation-error">
                 <h2>{{$message}}</h2>
