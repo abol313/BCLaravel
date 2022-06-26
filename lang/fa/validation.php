@@ -125,6 +125,9 @@ return array(
         "date" => "تاریخ",
         "time" => "زمان",
         "available" => "موجود",
-        "size" => "اندازه"
+        "size" => "اندازه",
+        "due"=>"موعد",
+        "commander"=>"فرمانده",
+        "soldier"=>"سرباز",
     ),
 );
