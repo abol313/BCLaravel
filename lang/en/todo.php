@@ -71,6 +71,15 @@ return [
         'delete'=>'Delete',
     ],
 
+    'controller'=>[
+        'todo'=>[
+            'edit'=>'The todo edited successfully !',
+            'create'=>'The todo created successfully !',
+            'delete'=>'The todo deleted successfully !',
+        ]
+    ],
+
     'no_todo'=>'No todo !',
+    'no_user_todo'=>'No user todo !',
     'made'=>'Made with interest ;)',
 ];
