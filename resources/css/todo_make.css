@@ -16,7 +16,7 @@ body{
 
 .todo-message{
     width:400px;
-    max-width:90%;
+    max-width:80vw;
     padding:20px;
     border-radius:20px;
     /* background-color:rgba(var(--focus-color),.5); */
@@ -50,6 +50,10 @@ body{
     flex-direction:column;
 }
 
+.form-todo-make > *{
+    box-sizing: border-box;
+    max-width:100% !important;
+}
 .form-todo-make :is(input,textarea){
     font-size:1.5em;
     margin-bottom:10px;
@@ -89,6 +93,8 @@ body{
 }
 
 .message-validation-error{
+    box-sizing:border-box;
+    width:100%;
     margin-top:-10px;
     margin-bottom:10px;
     
