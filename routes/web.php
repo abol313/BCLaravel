@@ -5,7 +5,9 @@
 // use App\Models as Models;
 
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\LocalizationController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -46,3 +48,4 @@ Route::controller(TodoController::class)
 Auth::routes();
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/setLocale/{locale}',[LocalizationController::class,'setLocale'])->name('setLocale');
