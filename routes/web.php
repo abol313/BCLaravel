@@ -9,6 +9,7 @@ use App\Http\Controllers\LocalizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -49,3 +50,15 @@ Auth::routes();
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/setLocale/{locale}',[LocalizationController::class,'setLocale'])->name('setLocale');
+
+Route::get('/test',function(){
+    $message = "Message";
+    Log::emergency($message);
+    Log::alert($message);
+    Log::critical($message);
+    Log::error($message);
+    Log::warning($message);
+    Log::notice($message);
+    Log::info($message);
+    Log::debug($message);
+});

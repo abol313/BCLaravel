@@ -7,28 +7,35 @@ use Illuminate\Http\Request;
 use App\Models\Todo;
 use App\Models\User;
 use App\Models\UserTodo;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller{
 
     public function listOne(Todo $todo){
+        Log::info("View todo{{$todo->id}}");
         return view('todo.todo',['todo'=>$todo]);
     }
 
     public function listAll(Request $request){
+        Log::info("View todos");
         $todos = Todo::all();
         return view('todo.list',compact('todos'));
     }
 
     public function create(){
+        Log::info("View todo create");
         return view('todo.make');
     }
 
     public function store(MakeTodoRequest $request){
+        Log::notice("Try create todo...");
 
         $attributes = $request->validated();
 
-        Todo::makeTodo($attributes);
+        $todo = Todo::makeTodo($attributes);
+
+        Log::notice("Create todo{{$todo->id}}! ".json_encode($todo->getAttributes()));
 
         $message = ['success'=>true,'message'=>__("todo.controller.todo.create"),'attributes'=>$attributes];
 
@@ -37,7 +44,7 @@ class TodoController extends Controller{
     }
 
     public function delete(Request $request,Todo $todo){
-        
+        Log::alert("Try delete todo{{$todo->id}}...");
         $usersTodos = UserTodo::where('todo',$todo->id)->get();
         if(!$usersTodos)
             return back()->withErrors(__("todo.no_user_todo"));
@@ -53,22 +60,27 @@ class TodoController extends Controller{
             array_push($soldiers,$soldier->id);
         }
         $todo->delete();
+        Log::alert("Delete todo{{$todo->id}}! ".json_encode($todo->getAttributes()));
 
         $request->session()->flash('report',['success'=>true,'message'=>__("todo.controller.todo.delete")]);
         return back();
     }
 
     public function edit(Todo $todo){
+        Log::info("View todo edit{{$todo->id}}");
         return view('todo.edit',['todo'=>$todo,'commander'=>($todo->getCommander()?->email),'soldier'=>($todo->getSoldier()?->email)]);
     }
 
     public function update(EditTodoRequest $request,Todo $todo){
-        
+        Log::warning("Try update todo{{$todo->id}}...");
         if(!$todo->hasRelationToUsers())
             return back()->withErrors(__("todo.no_user_todo"));
 
+        $pastAttributes = $todo->getAttributes();
         Todo::editTodo($todo,$request->validated());
+        $nowAttributes = $todo->getAttributes();
         
+        Log::warning("Update todo{id:$todo->id}! ".json_encode(['past'=>$pastAttributes,'now'=>$nowAttributes]));
         $request->session()->flash('report',['success'=>true,'message'=>__("todo.controller.todo.edit")]);
         return back();
 
