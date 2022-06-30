@@ -1,1 +1,16 @@
-@font-face{font-family:'Sarve Naz';src:url('../fonts/digi_sarve_naz/Digi_Sarvenaz.otf') format('opentype'),url('../fonts/digi_sarve_naz/Digi_Sarvenaz.ttf') format('truetype')}body{direction:rtl}header .languages{flex-direction:row-reverse!important}*{font-family:'Sarve Naz',cursive}
+@font-face {
+    font-family: 'Sarve Naz';
+    src: url('../fonts/digi_sarve_naz/Digi_Sarvenaz.otf') format('opentype'), url('../fonts/digi_sarve_naz/Digi_Sarvenaz.ttf') format('truetype')
+}
+
+body{
+    direction:rtl;
+}
+
+header .languages{
+    flex-direction:row-reverse !important;
+}
+
+*{
+    font-family:'Sarve Naz',cursive;
+}
