@@ -22,6 +22,8 @@
     @endif
     @stack('styles')
 
+    <script src="{{mix('js/bootstrap.js')}}"></script>
+
 </head>
 <body>
     <header>
@@ -48,6 +50,8 @@
         <hr/>
         <h1>@lang("todo.made")</h1>
     </footer>
+
+    <script src="{{mix('js/todoManager.js')}}" defer></script>
 </body>
 </html>
 
