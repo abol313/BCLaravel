@@ -18,7 +18,7 @@
     $deletePath = $id? route("todo.delete",['todo'=>$todo]):null;
     $editPath = $id? route("todo.edit",[$todo]):null;
 @endphp
-<div  {!! $attributes->class(['todo-item']) !!}>
+<div  {!! $attributes->class(['todo-item'])->merge(['id'=>$todo->id]) !!}>
     <x-todo.item.container>
         <x-todo.item.title value="{!! $title !!}" />
 
