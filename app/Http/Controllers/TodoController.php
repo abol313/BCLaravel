@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Events\TodoDeletedEvent;
+use App\Events\TodoUpdatedEvent;
 use App\Http\Requests\EditTodoRequest;
 use App\Http\Requests\MakeTodoRequest;
 use Illuminate\Http\Request;
@@ -59,8 +61,12 @@ class TodoController extends Controller{
             array_push($commanders,$commander->id);
             array_push($soldiers,$soldier->id);
         }
+
+        TodoDeletedEvent::dispatch($todo);
+        
         $todo->delete();
         Log::alert("Delete todo{{$todo->id}}!",$todo->getAttributes());
+    
 
         $request->session()->flash('report',['success'=>true,'message'=>__("todo.controller.todo.delete")]);
         return back();
@@ -80,6 +86,8 @@ class TodoController extends Controller{
         Todo::editTodo($todo,$request->validated());
         $nowAttributes = $todo->getAttributes();
         
+        TodoUpdatedEvent::dispatch($todo);
+
         Log::warning("Update todo{id:$todo->id}!",['past'=>$pastAttributes,'now'=>$nowAttributes]);
         $request->session()->flash('report',['success'=>true,'message'=>__("todo.controller.todo.edit")]);
         return back();
