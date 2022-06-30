@@ -3,6 +3,7 @@
     /* --focus-color:0, 255, 255;
     --unfocus-color:0, 0, 139; */
     padding:10px;
+    transition:all 500ms;
 }
 
 .todo-item .container{
@@ -106,4 +107,9 @@
 
 .no-todo-item {
     align-self:center;
+}
+
+.edited-todo-item {
+    transform:perspective(600px) rotateX(-3deg);
+    filter:hue-rotate(90deg);
 }
