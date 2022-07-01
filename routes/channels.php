@@ -1,5 +1,6 @@
 <?php
 
+use App\Broadcasting\TodoChannel;
 use App\Models\Todo;
 use Illuminate\Support\Facades\Broadcast;
 
@@ -18,9 +19,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('App.Models.Todo.x',function($user){
-    return true;
-});
-Broadcast::channel('App.Models.Todo.{todo}',function($user,Todo $todo){
-    return true;
-});
+
+Broadcast::channel('App.Models.Todo.{todo}',TodoChannel::class);
