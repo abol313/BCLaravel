@@ -1,9 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Events\TodoDeletedEvent;
-use App\Events\TodoUpdatedEvent;
-use App\Events\TodoCreatedEvent;
 use App\Http\Requests\EditTodoRequest;
 use App\Http\Requests\MakeTodoRequest;
 use Illuminate\Http\Request;
@@ -11,7 +8,6 @@ use App\Models\Todo;
 use App\Models\User;
 use App\Models\UserTodo;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller{
 
@@ -33,14 +29,11 @@ class TodoController extends Controller{
 
     public function store(MakeTodoRequest $request){
         Log::notice("Try create todo...");
-
         $attributes = $request->validated();
 
         $todo = Todo::makeTodo($attributes);
 
         Log::notice("Create todo{{$todo->id}}!",$todo->getAttributes());
-
-        TodoCreatedEvent::dispatch($todo);
 
         $message = ['success'=>true,'message'=>__("todo.controller.todo.create"),'attributes'=>$attributes];
 
@@ -65,8 +58,6 @@ class TodoController extends Controller{
             array_push($soldiers,$soldier->id);
         }
 
-        TodoDeletedEvent::dispatch($todo);
-        
         $todo->delete();
         Log::alert("Delete todo{{$todo->id}}!",$todo->getAttributes());
     
@@ -89,8 +80,6 @@ class TodoController extends Controller{
         Todo::editTodo($todo,$request->validated());
         $nowAttributes = $todo->getAttributes();
         
-        TodoUpdatedEvent::dispatch($todo);
-
         Log::warning("Update todo{id:$todo->id}!",['past'=>$pastAttributes,'now'=>$nowAttributes]);
         $request->session()->flash('report',['success'=>true,'message'=>__("todo.controller.todo.edit")]);
         return back();

@@ -1,15 +1,22 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\BroadcastsEvents;
 
 class Todo extends Model {
-    use HasFactory;
+    use BroadcastsEvents, HasFactory;
     protected $table = "todos";
-    protected $fillable = ['title','description','due','status'];
+    protected $fillable = [
+        'title',
+        'description',
+        'due',
+        'status'
+    ];
 
     public function fillIfPossible(array $attributes){
         $columnNames = Schema::getColumnListing($this->table);
@@ -46,11 +53,7 @@ class Todo extends Model {
         if(is_string($soldier))
             $soldier = User::where('email',$soldier)->first()->id;
 
-        $todo = new Todo;
-        foreach(Arr::except($data,['commander','soldier']) as $name => $value)
-            $todo->setAttribute($name,$value);
-
-        $todo->save();
+        $todo = self::create(Arr::except($data,['commander','soldier']));
 
         $todo->makeRelationToUsers($commander,$soldier);
 
@@ -106,7 +109,7 @@ class Todo extends Model {
             $soldier = User::where('email',$soldier)->first()->id;
 
         if(!$todo instanceof Model)
-            $todo = Todo::find($todo);
+            $todo = Todo::query()->find($todo);
 
         foreach(Arr::except($data,['commander','soldier']) as $name => $value)
             $todo->setAttribute($name,$value);
@@ -118,5 +121,13 @@ class Todo extends Model {
         return $todo;
     }
 
+
+    public function broadcastOn($event){
+
+        return match($event){
+            'created'=>new PrivateChannel('App.Models.Todo.x'),
+            default=>[$this]
+        };
+    }
 }
 
