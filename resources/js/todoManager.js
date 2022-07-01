@@ -3,18 +3,17 @@ const mainEl = document.querySelector("main")
 let [fakeTodoEl,...todoEls] = Array.from(document.querySelectorAll(".todo-item"))
 let noTodoEl = document.querySelector('.no-todo-item')
 
-Echo.channel('todo.new')
-    .listen('TodoCreatedEvent', e=>{
-        // console.log(e);
+Echo.private('App.Models.Todo.x')
+    .listen('.TodoCreated',e=>{
+        console.log('Created',e)
 
         if(!!noTodoEl){
             noTodoEl.remove()
             noTodoEl = null
         }
 
-        debugger;
         let todoEl = fakeTodoEl.cloneNode(true);
-        todoEl.setAttribute("id",e.todo.id)
+        todoEl.setAttribute("id",e.model.id)
         todoEl.removeAttribute("style")
 
         const titleEl = todoEl.querySelector('.container .title *')
@@ -24,42 +23,53 @@ Echo.channel('todo.new')
         const editEl = todoEl.querySelector('.container .edit > *')
         const deleteEl = todoEl.querySelector('.container .delete > *')
         
-        titleEl.innerHTML = e.todo.title
-        statusEl.innerHTML = e.todo.status
-        descriptionEl.innerHTML = e.todo.description
+        titleEl.innerHTML = e.model.title
+        statusEl.innerHTML = e.model.status
+        descriptionEl.innerHTML = e.model.description
         
-        if(e.todo.due===null)
+        if(e.model.due===null)
             dueEl.parentElement.remove()
         else
-            dueEl.innerHTML = e.todo.due
+            dueEl.innerHTML = e.model.due
 
-        editEl.setAttribute("href",editEl.getAttribute("href").replace("-1",e.todo.id))
-        deleteEl.setAttribute("href",deleteEl.getAttribute("href").replace("-1",e.todo.id))
+        editEl.setAttribute("href",editEl.getAttribute("href").replace("-1",e.model.id))
+        deleteEl.setAttribute("href",deleteEl.getAttribute("href").replace("-1",e.model.id))
 
         mainEl.appendChild(todoEl)
+
     })
+
 for(let todoEl of todoEls){
     const id = todoEl.getAttribute('id')
     const title = todoEl.querySelector('.container .title *')
     const status = todoEl.querySelector('.container .status *')
     const description = todoEl.querySelector('.container .description *')
-    const due = todoEl.querySelector('.container .due *')
+    const due = todoEl.querySelector('.container .due *') || fakeTodoEl.cloneNode(true).querySelector('.container .due *')
 
-    Echo.channel(`todo.${id}`)
-        .listen('TodoDeletedEvent', e=>{
-            todoEl.remove()
-            console.log('remove',e)
-        })
-        .listen('TodoUpdatedEvent', e=>{
+    Echo.private('App.Models.Todo.'+id)
+        .listen('.TodoSaved',e=>console.log('Saved',e))
+        .listen('.TodoUpdated',e=>{
+            console.log('Updated',e)
             todoEl.classList.add('edited-todo-item')
             todoEl.addEventListener("click",()=>{
                 todoEl.classList.remove('edited-todo-item')
             },{once:true})
-            title.innerHTML = e.todo.title
-            status.innerHTML = e.todo.status
-            description.innerHTML = e.todo.description
-            due.innerHTML = e.todo.due
-        });
+            title.innerHTML = e.model.title
+            status.innerHTML = e.model.status
+            description.innerHTML = e.model.description
+            due && (due.innerHTML = e.model.due);
+            // if(e.model.due){
+            //     due.innerHTML = e.model.due
+            //     if(due)
+            //         todoEl.appendChild(due)
+            // }
+        })
+        .listen('.TodoDeleted',e=>{
+            console.log('Deleted',e)
+            todoEl.remove()
+        })
+        .listen('.TodoTrashed',e=>console.log('Trashed',e))
+        .listen('.TodoRestored',e=>console.log('Restored',e))
 
 }
 
