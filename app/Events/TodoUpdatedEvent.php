@@ -40,7 +40,7 @@ class TodoUpdatedEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel("todo.{$this->todo->id}.update");
+        return new Channel("todo.{$this->todo->id}");
     }
 
 }

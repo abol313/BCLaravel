@@ -38,6 +38,6 @@ class TodoDeletedEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel("todo.{$this->todo->id}.delete");
+        return new Channel("todo.{$this->todo->id}");
     }
 }
