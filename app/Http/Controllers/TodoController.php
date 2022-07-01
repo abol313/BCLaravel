@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Events\TodoDeletedEvent;
 use App\Events\TodoUpdatedEvent;
+use App\Events\TodoCreatedEvent;
 use App\Http\Requests\EditTodoRequest;
 use App\Http\Requests\MakeTodoRequest;
 use Illuminate\Http\Request;
@@ -38,6 +39,8 @@ class TodoController extends Controller{
         $todo = Todo::makeTodo($attributes);
 
         Log::notice("Create todo{{$todo->id}}!",$todo->getAttributes());
+
+        TodoCreatedEvent::dispatch($todo);
 
         $message = ['success'=>true,'message'=>__("todo.controller.todo.create"),'attributes'=>$attributes];
 
